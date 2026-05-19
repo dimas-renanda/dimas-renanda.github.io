@@ -6,158 +6,188 @@
   <title>Dimas Renanda — IT Developer</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <style>
-    body { font-family: 'Inter', sans-serif; }
-    .font-code { font-family: 'Fira Code', monospace; }
+    * { font-family: 'Inter', sans-serif; }
+
+    body {
+      background: #0f0f13;
+      color: #e2e2e8;
+    }
+
+    .accent { color: #a78bfa; }
+
     .gradient-text {
-      background: linear-gradient(135deg, #00D9FF, #7B61FF);
+      background: linear-gradient(135deg, #a78bfa, #60a5fa, #34d399);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
     }
-    .card-hover {
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
+
+    .avatar-ring {
+      background: linear-gradient(135deg, #a78bfa, #60a5fa, #34d399);
+      padding: 3px;
+      border-radius: 1.25rem;
     }
-    .card-hover:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 20px 40px rgba(0,217,255,0.1);
+
+    .avatar-inner {
+      border-radius: 1rem;
+      overflow: hidden;
     }
-    .avatar-glow {
-      box-shadow: 0 0 40px rgba(0,217,255,0.3), 0 0 80px rgba(123,97,255,0.15);
+
+    .chip {
+      background: rgba(167,139,250,0.08);
+      border: 1px solid rgba(167,139,250,0.2);
+      color: #c4b5fd;
+      font-size: 0.75rem;
+      padding: 0.25rem 0.75rem;
+      border-radius: 9999px;
+      display: inline-block;
     }
-    .tag {
-      background: rgba(0,217,255,0.08);
-      border: 1px solid rgba(0,217,255,0.2);
-      color: #00D9FF;
+
+    .card {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.07);
+      border-radius: 1rem;
+      transition: border-color 0.2s, transform 0.2s;
     }
-    .section-line {
-      background: linear-gradient(90deg, #00D9FF, #7B61FF, transparent);
+
+    .card:hover {
+      border-color: rgba(167,139,250,0.3);
+      transform: translateY(-3px);
+    }
+
+    .skill-group {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 1rem;
+      padding: 1.5rem;
+    }
+
+    .divider {
+      background: linear-gradient(90deg, #a78bfa, #60a5fa, transparent);
       height: 1px;
+      border: none;
     }
+
+    nav a:hover { color: #a78bfa; }
+
     html { scroll-behavior: smooth; }
   </style>
 </head>
-<body class="bg-gray-950 text-gray-200 min-h-screen">
+<body class="min-h-screen">
 
   <!-- Nav -->
-  <nav class="fixed top-0 w-full z-50 bg-gray-950/80 backdrop-blur-md border-b border-gray-800/50">
-    <div class="max-w-4xl mx-auto px-6 py-4 flex justify-between items-center">
-      <span class="font-code text-sm text-cyan-400">~/dimas-renanda</span>
+  <nav class="fixed top-0 w-full z-50 bg-[#0f0f13]/80 backdrop-blur-md border-b border-white/5">
+    <div class="max-w-3xl mx-auto px-6 py-4 flex justify-between items-center">
+      <span class="text-sm font-medium text-violet-400">dimas-renanda</span>
       <div class="flex gap-6 text-sm text-gray-400">
-        <a href="#about" class="hover:text-cyan-400 transition-colors">About</a>
-        <a href="#skills" class="hover:text-cyan-400 transition-colors">Skills</a>
-        <a href="#projects" class="hover:text-cyan-400 transition-colors">Projects</a>
-        <a href="#contact" class="hover:text-cyan-400 transition-colors">Contact</a>
+        <a href="#about" class="transition-colors">About</a>
+        <a href="#skills" class="transition-colors">Skills</a>
+        <a href="#projects" class="transition-colors">Projects</a>
+        <a href="#contact" class="transition-colors">Contact</a>
       </div>
     </div>
   </nav>
 
   <!-- Hero -->
-  <section id="about" class="max-w-4xl mx-auto px-6 pt-32 pb-20">
+  <section id="about" class="max-w-3xl mx-auto px-6 pt-32 pb-20">
     <div class="flex flex-col md:flex-row items-center gap-12">
-      <!-- Avatar -->
+
       <div class="flex-shrink-0">
-        <div class="w-48 h-48 rounded-2xl overflow-hidden avatar-glow border border-gray-700/50">
-          <img src="avatar.jpg" alt="Dimas Renanda" class="w-full h-full object-cover" />
+        <div class="avatar-ring w-44 h-44">
+          <div class="avatar-inner w-full h-full bg-[#0f0f13]">
+            <img src="avatar.jpg" alt="Dimas Renanda" class="w-full h-full object-cover" style="border-radius:1rem;" />
+          </div>
         </div>
       </div>
 
-      <!-- Bio -->
       <div>
-        <p class="font-code text-cyan-400 text-sm mb-2">// hello world 👋</p>
-        <h1 class="text-4xl font-bold mb-2">
+        <p class="text-violet-400 text-sm font-medium mb-2">Hey there 👋</p>
+        <h1 class="text-4xl font-bold mb-3">
           <span class="gradient-text">Dimas Renanda</span>
         </h1>
-        <p class="text-gray-400 text-lg mb-4 font-medium">IT Developer · DevOps · Full-Stack</p>
-        <p class="text-gray-400 leading-relaxed max-w-lg">
-          A hands-on IT developer who's been deep in infrastructure, networking, and software for years.
-          Whether it's spinning up a VPS, configuring a reverse proxy, or shipping a Flutter app —
-          I keep things clean, reliable, and production-ready. 🐧
+        <p class="text-gray-400 text-base mb-5 leading-relaxed">
+          A hands-on IT developer with years of experience across infrastructure, networking, and software.
+          I enjoy building things that work quietly in the background — servers, pipelines, apps — 
+          and making sure they stay up when it matters. Clean systems, simple solutions.
         </p>
-        <div class="flex gap-3 mt-6 flex-wrap">
+        <div class="flex gap-3 flex-wrap">
           <a href="https://github.com/dimas-renanda" target="_blank"
-             class="flex items-center gap-2 bg-gray-800 hover:bg-gray-700 px-4 py-2 rounded-lg text-sm transition-colors">
+             class="flex items-center gap-2 bg-white/5 hover:bg-white/10 border border-white/10 px-4 py-2 rounded-full text-sm transition-all">
             <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
             GitHub
           </a>
           <a href="https://linkedin.com/in/dimasrenanda" target="_blank"
-             class="flex items-center gap-2 bg-blue-900/40 hover:bg-blue-800/50 border border-blue-700/40 px-4 py-2 rounded-lg text-sm transition-colors text-blue-300">
+             class="flex items-center gap-2 bg-blue-500/10 hover:bg-blue-500/20 border border-blue-500/20 px-4 py-2 rounded-full text-sm transition-all text-blue-300">
             <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
             LinkedIn
           </a>
         </div>
       </div>
+
     </div>
   </section>
 
   <!-- Skills -->
-  <section id="skills" class="max-w-4xl mx-auto px-6 py-16">
-    <div class="section-line mb-8"></div>
-    <h2 class="text-2xl font-bold mb-2">Skills & Stack</h2>
-    <p class="text-gray-500 text-sm mb-8 font-code">// things I work with daily</p>
+  <section id="skills" class="max-w-3xl mx-auto px-6 py-16">
+    <hr class="divider mb-10">
+    <h2 class="text-2xl font-bold mb-1">What I work with</h2>
+    <p class="text-gray-500 text-sm mb-8">Technologies and tools I use day to day.</p>
 
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
 
-      <!-- Infrastructure -->
-      <div class="bg-gray-900/60 border border-gray-800 rounded-xl p-6 card-hover">
-        <div class="text-2xl mb-3">🖥️</div>
-        <h3 class="font-semibold mb-3 text-white">Infrastructure & DevOps</h3>
+      <div class="skill-group">
+        <p class="text-violet-400 font-semibold mb-3">Infrastructure & DevOps</p>
         <div class="flex flex-wrap gap-2">
-          <span class="tag text-xs px-2 py-1 rounded-md">Proxmox</span>
-          <span class="tag text-xs px-2 py-1 rounded-md">VPS</span>
-          <span class="tag text-xs px-2 py-1 rounded-md">Nginx</span>
-          <span class="tag text-xs px-2 py-1 rounded-md">Traefik</span>
-          <span class="tag text-xs px-2 py-1 rounded-md">Cloudflare</span>
-          <span class="tag text-xs px-2 py-1 rounded-md">Docker</span>
-          <span class="tag text-xs px-2 py-1 rounded-md">Linux</span>
-          <span class="tag text-xs px-2 py-1 rounded-md">Redis</span>
+          <span class="chip">Proxmox</span>
+          <span class="chip">VPS</span>
+          <span class="chip">Nginx</span>
+          <span class="chip">Traefik</span>
+          <span class="chip">Cloudflare</span>
+          <span class="chip">Docker</span>
+          <span class="chip">Linux</span>
+          <span class="chip">Redis</span>
         </div>
       </div>
 
-      <!-- Networking & IoT -->
-      <div class="bg-gray-900/60 border border-gray-800 rounded-xl p-6 card-hover">
-        <div class="text-2xl mb-3">🌐</div>
-        <h3 class="font-semibold mb-3 text-white">Networking & IoT</h3>
+      <div class="skill-group">
+        <p class="text-blue-400 font-semibold mb-3">Networking & IoT</p>
         <div class="flex flex-wrap gap-2">
-          <span class="tag text-xs px-2 py-1 rounded-md">Mikrotik</span>
-          <span class="tag text-xs px-2 py-1 rounded-md">Home Assistant</span>
-          <span class="tag text-xs px-2 py-1 rounded-md">MQTT</span>
-          <span class="tag text-xs px-2 py-1 rounded-md">IP Camera</span>
-          <span class="tag text-xs px-2 py-1 rounded-md">NVR</span>
-          <span class="tag text-xs px-2 py-1 rounded-md">VLAN</span>
-          <span class="tag text-xs px-2 py-1 rounded-md">DNS</span>
+          <span class="chip" style="color:#93c5fd;border-color:rgba(96,165,250,0.3);background:rgba(96,165,250,0.06)">Mikrotik</span>
+          <span class="chip" style="color:#93c5fd;border-color:rgba(96,165,250,0.3);background:rgba(96,165,250,0.06)">Home Assistant</span>
+          <span class="chip" style="color:#93c5fd;border-color:rgba(96,165,250,0.3);background:rgba(96,165,250,0.06)">MQTT</span>
+          <span class="chip" style="color:#93c5fd;border-color:rgba(96,165,250,0.3);background:rgba(96,165,250,0.06)">IP Camera</span>
+          <span class="chip" style="color:#93c5fd;border-color:rgba(96,165,250,0.3);background:rgba(96,165,250,0.06)">NVR</span>
+          <span class="chip" style="color:#93c5fd;border-color:rgba(96,165,250,0.3);background:rgba(96,165,250,0.06)">VLAN</span>
+          <span class="chip" style="color:#93c5fd;border-color:rgba(96,165,250,0.3);background:rgba(96,165,250,0.06)">DNS</span>
         </div>
       </div>
 
-      <!-- Development -->
-      <div class="bg-gray-900/60 border border-gray-800 rounded-xl p-6 card-hover">
-        <div class="text-2xl mb-3">💻</div>
-        <h3 class="font-semibold mb-3 text-white">Development</h3>
+      <div class="skill-group">
+        <p class="text-emerald-400 font-semibold mb-3">Development</p>
         <div class="flex flex-wrap gap-2">
-          <span class="tag text-xs px-2 py-1 rounded-md">Flutter</span>
-          <span class="tag text-xs px-2 py-1 rounded-md">Python</span>
-          <span class="tag text-xs px-2 py-1 rounded-md">FastAPI</span>
-          <span class="tag text-xs px-2 py-1 rounded-md">Go</span>
-          <span class="tag text-xs px-2 py-1 rounded-md">Node.js</span>
-          <span class="tag text-xs px-2 py-1 rounded-md">PHP</span>
-          <span class="tag text-xs px-2 py-1 rounded-md">Next.js</span>
+          <span class="chip" style="color:#6ee7b7;border-color:rgba(52,211,153,0.3);background:rgba(52,211,153,0.06)">Flutter</span>
+          <span class="chip" style="color:#6ee7b7;border-color:rgba(52,211,153,0.3);background:rgba(52,211,153,0.06)">Python</span>
+          <span class="chip" style="color:#6ee7b7;border-color:rgba(52,211,153,0.3);background:rgba(52,211,153,0.06)">FastAPI</span>
+          <span class="chip" style="color:#6ee7b7;border-color:rgba(52,211,153,0.3);background:rgba(52,211,153,0.06)">Go</span>
+          <span class="chip" style="color:#6ee7b7;border-color:rgba(52,211,153,0.3);background:rgba(52,211,153,0.06)">Node.js</span>
+          <span class="chip" style="color:#6ee7b7;border-color:rgba(52,211,153,0.3);background:rgba(52,211,153,0.06)">PHP</span>
+          <span class="chip" style="color:#6ee7b7;border-color:rgba(52,211,153,0.3);background:rgba(52,211,153,0.06)">Next.js</span>
         </div>
       </div>
 
-      <!-- Databases -->
-      <div class="bg-gray-900/60 border border-gray-800 rounded-xl p-6 card-hover">
-        <div class="text-2xl mb-3">🗄️</div>
-        <h3 class="font-semibold mb-3 text-white">Databases</h3>
+      <div class="skill-group">
+        <p class="text-amber-400 font-semibold mb-3">Databases</p>
         <div class="flex flex-wrap gap-2">
-          <span class="tag text-xs px-2 py-1 rounded-md">MySQL</span>
-          <span class="tag text-xs px-2 py-1 rounded-md">MariaDB</span>
-          <span class="tag text-xs px-2 py-1 rounded-md">PostgreSQL</span>
-          <span class="tag text-xs px-2 py-1 rounded-md">MongoDB</span>
-          <span class="tag text-xs px-2 py-1 rounded-md">Redis</span>
-          <span class="tag text-xs px-2 py-1 rounded-md">Oracle</span>
-          <span class="tag text-xs px-2 py-1 rounded-md">MSSQL</span>
-          <span class="tag text-xs px-2 py-1 rounded-md">Neo4j</span>
+          <span class="chip" style="color:#fcd34d;border-color:rgba(251,191,36,0.3);background:rgba(251,191,36,0.06)">MySQL</span>
+          <span class="chip" style="color:#fcd34d;border-color:rgba(251,191,36,0.3);background:rgba(251,191,36,0.06)">MariaDB</span>
+          <span class="chip" style="color:#fcd34d;border-color:rgba(251,191,36,0.3);background:rgba(251,191,36,0.06)">PostgreSQL</span>
+          <span class="chip" style="color:#fcd34d;border-color:rgba(251,191,36,0.3);background:rgba(251,191,36,0.06)">MongoDB</span>
+          <span class="chip" style="color:#fcd34d;border-color:rgba(251,191,36,0.3);background:rgba(251,191,36,0.06)">Redis</span>
+          <span class="chip" style="color:#fcd34d;border-color:rgba(251,191,36,0.3);background:rgba(251,191,36,0.06)">Oracle</span>
+          <span class="chip" style="color:#fcd34d;border-color:rgba(251,191,36,0.3);background:rgba(251,191,36,0.06)">MSSQL</span>
+          <span class="chip" style="color:#fcd34d;border-color:rgba(251,191,36,0.3);background:rgba(251,191,36,0.06)">Neo4j</span>
         </div>
       </div>
 
@@ -165,95 +195,89 @@
   </section>
 
   <!-- Projects -->
-  <section id="projects" class="max-w-4xl mx-auto px-6 py-16">
-    <div class="section-line mb-8"></div>
-    <h2 class="text-2xl font-bold mb-2">Projects</h2>
-    <p class="text-gray-500 text-sm mb-8 font-code">// most work is private — here's what I can share</p>
+  <section id="projects" class="max-w-3xl mx-auto px-6 py-16">
+    <hr class="divider mb-10">
+    <h2 class="text-2xl font-bold mb-1">Projects</h2>
+    <p class="text-gray-500 text-sm mb-8">Some things I've built and shipped.</p>
 
     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
 
-      <a href="https://github.com/dimas-renanda/tridom-pantry" target="_blank"
-         class="bg-gray-900/60 border border-gray-800 hover:border-cyan-800/50 rounded-xl p-5 card-hover block">
-        <div class="flex items-start justify-between mb-2">
+      <a href="https://github.com/dimas-renanda/tridom-pantry" target="_blank" class="card p-5 block">
+        <div class="flex justify-between items-start mb-3">
           <span class="text-xl">🛒</span>
-          <span class="text-xs text-gray-500 font-code">Flutter · Dart</span>
+          <span class="text-xs text-gray-500">Flutter · Dart</span>
         </div>
         <h3 class="font-semibold text-white mb-1">tridom-pantry</h3>
-        <p class="text-gray-400 text-sm">Order management app with REST API, Hive database, and admin UI.</p>
+        <p class="text-gray-400 text-sm">Order management app with REST API, local database, and admin UI.</p>
       </a>
 
-      <a href="https://github.com/dimas-renanda/ipcam" target="_blank"
-         class="bg-gray-900/60 border border-gray-800 hover:border-cyan-800/50 rounded-xl p-5 card-hover block">
-        <div class="flex items-start justify-between mb-2">
+      <a href="https://github.com/dimas-renanda/ipcam" target="_blank" class="card p-5 block">
+        <div class="flex justify-between items-start mb-3">
           <span class="text-xl">🎥</span>
-          <span class="text-xs text-gray-500 font-code">Python · Networking</span>
+          <span class="text-xs text-gray-500">Python · Networking</span>
         </div>
         <h3 class="font-semibold text-white mb-1">ipcam</h3>
-        <p class="text-gray-400 text-sm">IP Camera management — NVR integration & remote monitoring.</p>
+        <p class="text-gray-400 text-sm">IP Camera management with NVR integration and remote monitoring.</p>
       </a>
 
-      <a href="https://github.com/dimas-renanda/apisymfony" target="_blank"
-         class="bg-gray-900/60 border border-gray-800 hover:border-cyan-800/50 rounded-xl p-5 card-hover block">
-        <div class="flex items-start justify-between mb-2">
+      <a href="https://github.com/dimas-renanda/apisymfony" target="_blank" class="card p-5 block">
+        <div class="flex justify-between items-start mb-3">
           <span class="text-xl">⚙️</span>
-          <span class="text-xs text-gray-500 font-code">PHP · Symfony</span>
+          <span class="text-xs text-gray-500">PHP · Symfony</span>
         </div>
         <h3 class="font-semibold text-white mb-1">apisymfony</h3>
-        <p class="text-gray-400 text-sm">RESTful API backend built with Symfony PHP framework.</p>
+        <p class="text-gray-400 text-sm">RESTful API backend built with Symfony — clean and structured.</p>
       </a>
 
-      <a href="https://github.com/dimas-renanda/address-search-nextjs" target="_blank"
-         class="bg-gray-900/60 border border-gray-800 hover:border-cyan-800/50 rounded-xl p-5 card-hover block">
-        <div class="flex items-start justify-between mb-2">
+      <a href="https://github.com/dimas-renanda/address-search-nextjs" target="_blank" class="card p-5 block">
+        <div class="flex justify-between items-start mb-3">
           <span class="text-xl">📍</span>
-          <span class="text-xs text-gray-500 font-code">Next.js · React</span>
+          <span class="text-xs text-gray-500">Next.js · React</span>
         </div>
         <h3 class="font-semibold text-white mb-1">address-search-nextjs</h3>
         <p class="text-gray-400 text-sm">Fast and responsive address lookup app built with Next.js.</p>
       </a>
 
-      <a href="https://github.com/dimas-renanda/crossradius-admin" target="_blank"
-         class="bg-gray-900/60 border border-gray-800 hover:border-cyan-800/50 rounded-xl p-5 card-hover block">
-        <div class="flex items-start justify-between mb-2">
+      <a href="https://github.com/dimas-renanda/crossradius-admin" target="_blank" class="card p-5 block">
+        <div class="flex justify-between items-start mb-3">
           <span class="text-xl">🌐</span>
-          <span class="text-xs text-gray-500 font-code">PHP</span>
+          <span class="text-xs text-gray-500">PHP</span>
         </div>
         <h3 class="font-semibold text-white mb-1">crossradius-admin</h3>
-        <p class="text-gray-400 text-sm">Admin panel for RADIUS/hotspot network management.</p>
+        <p class="text-gray-400 text-sm">Admin panel for managing RADIUS and hotspot users.</p>
       </a>
 
-      <a href="https://github.com/dimas-renanda/mongo-sql-hotel" target="_blank"
-         class="bg-gray-900/60 border border-gray-800 hover:border-cyan-800/50 rounded-xl p-5 card-hover block">
-        <div class="flex items-start justify-between mb-2">
+      <a href="https://github.com/dimas-renanda/mongo-sql-hotel" target="_blank" class="card p-5 block">
+        <div class="flex justify-between items-start mb-3">
           <span class="text-xl">🏨</span>
-          <span class="text-xs text-gray-500 font-code">PHP · MongoDB</span>
+          <span class="text-xs text-gray-500">PHP · MongoDB</span>
         </div>
         <h3 class="font-semibold text-white mb-1">mongo-sql-hotel</h3>
-        <p class="text-gray-400 text-sm">Hotel management system with MongoDB & SQL integration.</p>
+        <p class="text-gray-400 text-sm">Hotel management system with MongoDB and SQL integration.</p>
       </a>
 
     </div>
   </section>
 
   <!-- Contact -->
-  <section id="contact" class="max-w-4xl mx-auto px-6 py-16 pb-32">
-    <div class="section-line mb-8"></div>
-    <h2 class="text-2xl font-bold mb-2">Get In Touch</h2>
-    <p class="text-gray-500 text-sm mb-8 font-code">// let's build something together</p>
+  <section id="contact" class="max-w-3xl mx-auto px-6 py-16 pb-32">
+    <hr class="divider mb-10">
+    <h2 class="text-2xl font-bold mb-1">Get In Touch</h2>
+    <p class="text-gray-500 text-sm mb-8">Let's build something together.</p>
 
-    <div class="bg-gray-900/60 border border-gray-800 rounded-xl p-8 text-center">
-      <p class="text-gray-400 mb-6 max-w-md mx-auto">
+    <div class="card p-8 text-center">
+      <p class="text-gray-400 mb-6 max-w-md mx-auto text-sm leading-relaxed">
         Open for collaborations, freelance projects, or just a casual chat about tech.
         Either way, I'd love to hear from you. Ping me anytime! 🐧
       </p>
       <div class="flex justify-center gap-4 flex-wrap">
         <a href="https://github.com/dimas-renanda" target="_blank"
-           class="flex items-center gap-2 bg-gray-800 hover:bg-gray-700 px-5 py-2.5 rounded-lg text-sm transition-colors">
+           class="flex items-center gap-2 bg-white/5 hover:bg-white/10 border border-white/10 px-5 py-2.5 rounded-full text-sm transition-all">
           <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
           GitHub
         </a>
         <a href="https://linkedin.com/in/dimasrenanda" target="_blank"
-           class="flex items-center gap-2 bg-blue-900/40 hover:bg-blue-800/50 border border-blue-700/40 px-5 py-2.5 rounded-lg text-sm transition-colors text-blue-300">
+           class="flex items-center gap-2 bg-blue-500/10 hover:bg-blue-500/20 border border-blue-500/20 px-5 py-2.5 rounded-full text-sm transition-all text-blue-300">
           <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
           LinkedIn
         </a>
@@ -262,8 +286,8 @@
   </section>
 
   <!-- Footer -->
-  <footer class="border-t border-gray-800/50 py-6 text-center text-gray-600 text-sm font-code">
-    <p>© 2026 dimas-renanda · built with ☕ & 🐧</p>
+  <footer class="border-t border-white/5 py-6 text-center text-gray-600 text-sm">
+    <p>© 2026 Dimas Renanda · built with ☕ and good vibes</p>
   </footer>
 
 </body>
