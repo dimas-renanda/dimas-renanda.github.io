@@ -175,6 +175,134 @@
     .scroll-reveal.visible {
       animation: scrollRevealIn 0.6s ease forwards;
     }
+
+    /* ===== STORY VIEWER ===== */
+    .avatar-ring { cursor: pointer; }
+    .avatar-ring::after {
+      content: '';
+      position: absolute;
+      inset: -3px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #00D9FF, #3b82f6, #a855f7);
+      z-index: -1;
+      animation: storyRingPulse 2s ease-in-out infinite;
+    }
+    .avatar-ring { position: relative; }
+    @keyframes storyRingPulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.6; }
+    }
+
+    #storyOverlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      background: #000;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      touch-action: none;
+    }
+    #storyOverlay.active { display: flex; }
+
+    #storyProgress {
+      position: absolute;
+      top: 12px;
+      left: 12px;
+      right: 12px;
+      display: flex;
+      gap: 4px;
+      z-index: 10;
+    }
+    .story-seg {
+      flex: 1;
+      height: 3px;
+      background: rgba(255,255,255,0.3);
+      border-radius: 2px;
+      overflow: hidden;
+    }
+    .story-seg-fill {
+      height: 100%;
+      width: 0%;
+      background: #fff;
+      border-radius: 2px;
+      transition: none;
+    }
+    .story-seg-fill.done { width: 100%; }
+    .story-seg-fill.active { animation: segProgress 5s linear forwards; }
+    @keyframes segProgress { from { width: 0% } to { width: 100% } }
+
+    #storyHeader {
+      position: absolute;
+      top: 28px;
+      left: 16px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      z-index: 10;
+    }
+    #storyAvatar {
+      width: 36px; height: 36px;
+      border-radius: 50%;
+      border: 2px solid #fff;
+      object-fit: cover;
+    }
+    #storyUsername {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: #fff;
+      text-shadow: 0 1px 4px rgba(0,0,0,0.6);
+    }
+    #storyCaption {
+      font-size: 0.75rem;
+      color: rgba(255,255,255,0.7);
+    }
+
+    #storyClose {
+      position: absolute;
+      top: 28px;
+      right: 16px;
+      z-index: 10;
+      background: none;
+      border: none;
+      color: #fff;
+      font-size: 1.6rem;
+      cursor: pointer;
+      line-height: 1;
+      text-shadow: 0 1px 4px rgba(0,0,0,0.6);
+    }
+
+    #storyImg {
+      max-width: 100%;
+      max-height: 100vh;
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      user-select: none;
+      -webkit-user-drag: none;
+    }
+
+    #storyTapLeft, #storyTapRight {
+      position: absolute;
+      top: 0; bottom: 0;
+      width: 40%;
+      z-index: 5;
+      cursor: pointer;
+    }
+    #storyTapLeft { left: 0; }
+    #storyTapRight { right: 0; }
+
+    #storyLabel {
+      position: absolute;
+      bottom: 24px;
+      left: 0; right: 0;
+      text-align: center;
+      font-size: 0.8rem;
+      color: rgba(255,255,255,0.6);
+      z-index: 10;
+      pointer-events: none;
+    }
   </style>
 </head>
 <body class="min-h-screen flex items-center justify-center px-6 py-20">
@@ -317,6 +445,112 @@
 
     revealElements.forEach(el => revealObserver.observe(el));
   </script>
+
+  <!-- ===== STORY OVERLAY ===== -->
+  <div id="storyOverlay">
+    <div id="storyProgress"></div>
+    <div id="storyHeader">
+      <img id="storyAvatar" src="avatar.jpg" alt="Dimas"/>
+      <div>
+        <div id="storyUsername">dimas.renanda</div>
+        <div id="storyCaption">Projects & Daily Life</div>
+      </div>
+    </div>
+    <button id="storyClose">&times;</button>
+    <img id="storyImg" src="" alt="story"/>
+    <div id="storyTapLeft"></div>
+    <div id="storyTapRight"></div>
+    <div id="storyLabel">Tap to navigate &nbsp;·&nbsp; Swipe down to close</div>
+  </div>
+
+  <script>
+    const stories = [
+      { src: 'stories/story1.jpg' },
+      { src: 'stories/story2.jpg' },
+      { src: 'stories/story3.jpg' },
+      { src: 'stories/story4.jpg' },
+      { src: 'stories/story5.jpg' },
+      { src: 'stories/story6.jpg' },
+    ];
+
+    let current = 0;
+    let timer = null;
+    const overlay  = document.getElementById('storyOverlay');
+    const img      = document.getElementById('storyImg');
+    const progress = document.getElementById('storyProgress');
+    const closeBtn = document.getElementById('storyClose');
+    const tapLeft  = document.getElementById('storyTapLeft');
+    const tapRight = document.getElementById('storyTapRight');
+
+    function buildProgress() {
+      progress.innerHTML = stories.map((_, i) =>
+        `<div class="story-seg"><div class="story-seg-fill" id="seg${i}"></div></div>`
+      ).join('');
+    }
+
+    function goTo(n) {
+      clearTimeout(timer);
+      if (n < 0) { closeStory(); return; }
+      if (n >= stories.length) { closeStory(); return; }
+      current = n;
+      img.src = stories[current].src;
+
+      // Update segments
+      for (let i = 0; i < stories.length; i++) {
+        const fill = document.getElementById('seg' + i);
+        fill.className = 'story-seg-fill';
+        if (i < current) fill.classList.add('done');
+        else if (i === current) {
+          // Force reflow to restart animation
+          void fill.offsetWidth;
+          fill.classList.add('active');
+        }
+      }
+
+      timer = setTimeout(() => goTo(current + 1), 5000);
+    }
+
+    function openStory() {
+      buildProgress();
+      overlay.classList.add('active');
+      document.body.style.overflow = 'hidden';
+      goTo(0);
+    }
+
+    function closeStory() {
+      clearTimeout(timer);
+      overlay.classList.remove('active');
+      document.body.style.overflow = '';
+      img.src = '';
+    }
+
+    // Open on avatar click
+    document.querySelector('.avatar-ring').addEventListener('click', openStory);
+
+    // Close button
+    closeBtn.addEventListener('click', closeStory);
+
+    // Tap left/right
+    tapLeft.addEventListener('click', () => goTo(current - 1));
+    tapRight.addEventListener('click', () => goTo(current + 1));
+
+    // Keyboard
+    document.addEventListener('keydown', e => {
+      if (!overlay.classList.contains('active')) return;
+      if (e.key === 'ArrowLeft') goTo(current - 1);
+      if (e.key === 'ArrowRight' || e.key === ' ') goTo(current + 1);
+      if (e.key === 'Escape') closeStory();
+    });
+
+    // Swipe down to close
+    let touchStartY = 0;
+    overlay.addEventListener('touchstart', e => { touchStartY = e.touches[0].clientY; }, { passive: true });
+    overlay.addEventListener('touchend', e => {
+      const dy = e.changedTouches[0].clientY - touchStartY;
+      if (dy > 80) closeStory();
+    }, { passive: true });
+  </script>
+
 </body>
 </html>
 
