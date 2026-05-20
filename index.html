@@ -3,18 +3,99 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  
   <title>Dimas Renanda</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
   <style>
     * { font-family: 'Inter', sans-serif; }
-    body { background: #0f0f13; color: #d1d1d8; }
+    body { 
+      background: #0f0f13; 
+      color: #d1d1d8;
+      opacity: 0;
+      animation: pageLoadFadeIn 0.6s ease 0.1s forwards;
+    }
+
+    /* 1. Page load fade-in */
+    @keyframes pageLoadFadeIn {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
+    }
+
+    /* 2. Staggered slide-up entrance */
+    @keyframes slideUpIn {
+      from {
+        opacity: 0;
+        transform: translateY(24px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .avatar-container {
+      animation: slideUpIn 0.6s ease 0.2s forwards;
+      opacity: 0;
+    }
+
+    .name-subtitle {
+      animation: slideUpIn 0.6s ease 0.3s forwards;
+      opacity: 0;
+    }
+
+    .intro-paragraph {
+      animation: slideUpIn 0.6s ease 0.4s forwards;
+      opacity: 0;
+
+      &:nth-of-type(2) {
+        animation: slideUpIn 0.6s ease 0.5s forwards;
+      }
+    }
+
+    .specializations-section {
+      animation: slideUpIn 0.6s ease 0.6s forwards;
+      opacity: 0;
+    }
+
+    .contact-section {
+      animation: slideUpIn 0.6s ease 0.7s forwards;
+      opacity: 0;
+    }
+
+    /* 3. Avatar glow pulse */
+    @keyframes avatarGlowPulse {
+      0%, 100% {
+        box-shadow: 0 0 0 0 rgba(0, 217, 255, 0.3), 
+                    inset 0 0 20px rgba(0, 217, 255, 0.1);
+      }
+      50% {
+        box-shadow: 0 0 0 8px rgba(0, 217, 255, 0.05), 
+                    inset 0 0 40px rgba(0, 217, 255, 0.2);
+      }
+    }
 
     .gradient-name {
       background: linear-gradient(135deg, #00D9FF, #3b82f6);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
+      background-size: 200% 200%;
+      animation: nameGradientShift 4s ease infinite alternate;
+    }
+
+    /* 6. Name gradient animation */
+    @keyframes nameGradientShift {
+      0% {
+        background-position: 0% 50%;
+      }
+      100% {
+        background-position: 100% 50%;
+      }
     }
 
     .avatar-ring {
@@ -22,6 +103,7 @@
       padding: 3px;
       border-radius: 50%;
       display: inline-block;
+      animation: avatarGlowPulse 3s ease-in-out infinite;
     }
 
     .chip {
@@ -33,6 +115,15 @@
       border: 1px solid rgba(0,217,255,0.2);
       color: #67e8f9;
       margin: 0.2rem;
+      transition: all 0.2s ease;
+    }
+
+    /* 4. Chip hover lift */
+    .chip:hover {
+      transform: translateY(-2px);
+      border-color: rgba(0, 217, 255, 0.6);
+      background: rgba(0,217,255,0.12);
+      box-shadow: 0 8px 16px rgba(0, 217, 255, 0.15);
     }
 
     a.social {
@@ -42,40 +133,81 @@
       font-size: 0.85rem;
       color: #9ca3af;
       text-decoration: none;
-      transition: color 0.2s;
+      transition: all 0.2s ease;
     }
-    a.social:hover { color: #00D9FF; }
+
+    /* 7. Social links slide right on hover */
+    a.social:hover { 
+      color: #00D9FF;
+      transform: translateX(3px);
+    }
+
+    /* 5. Cursor glow effect */
+    .cursor-glow {
+      position: fixed;
+      pointer-events: none;
+      width: 300px;
+      height: 300px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(0, 217, 255, 0.2) 0%, rgba(0, 217, 255, 0.05) 70%, transparent 100%);
+      opacity: 0.2;
+      z-index: 1;
+      mix-blend-mode: screen;
+      filter: blur(40px);
+    }
+
+    /* Scroll reveal fade and slide */
+    @keyframes scrollRevealIn {
+      from {
+        opacity: 0;
+        transform: translateY(16px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .scroll-reveal {
+      opacity: 0;
+    }
+
+    .scroll-reveal.visible {
+      animation: scrollRevealIn 0.6s ease forwards;
+    }
   </style>
 </head>
 <body class="min-h-screen flex items-center justify-center px-6 py-20">
 
+  <div class="cursor-glow" id="cursorGlow"></div>
+
   <div class="max-w-xl w-full">
 
     <!-- Avatar + Name -->
-    <div class="flex items-center gap-5 mb-8">
+    <div class="avatar-container flex items-center gap-5 mb-8">
       <div class="avatar-ring flex-shrink-0">
         <div style="border-radius:50%;overflow:hidden;width:72px;height:72px;">
           <img src="avatar.jpg" alt="Dimas Renanda" style="width:100%;height:100%;object-fit:cover;" />
         </div>
       </div>
-      <div>
+      <div class="name-subtitle">
         <h1 class="text-2xl font-semibold gradient-name">Dimas Renanda</h1>
         <p class="text-gray-500 text-sm mt-0.5">IT Developer · Mobile & Web · DevOps</p>
       </div>
     </div>
 
-    <p class="text-gray-400 leading-relaxed mb-4 text-sm">
+    <p class="intro-paragraph scroll-reveal text-gray-400 leading-relaxed mb-4 text-sm">
       I build mobile apps, web apps, and Android TV experiences — and I take care of the infrastructure behind them too.
       From Flutter apps to server configs, I like owning the full picture.
       Clean code, reliable systems, and things that actually work in production.
     </p>
-    <p class="text-gray-500 leading-relaxed mb-8 text-sm">
+    <p class="intro-paragraph scroll-reveal text-gray-500 leading-relaxed mb-8 text-sm">
       On the side, I enjoy reverse engineering and digging through app internals — reading logs, tracing calls, and figuring out how things really work under the hood.
       Let's just say not everything is as locked down as it should be. And public infrastructure security is... a work in progress. 👀
     </p>
 
     <!-- Specializations -->
-    <div class="mb-10">
+    <div class="specializations-section scroll-reveal mb-10">
 
       <div class="mb-5">
         <p class="text-xs text-gray-600 uppercase tracking-widest mb-3">Languages & Frameworks</p>
@@ -135,7 +267,7 @@
     </div>
 
     <!-- Contact -->
-    <div class="flex flex-wrap gap-5 text-sm border-t border-white/5 pt-6">
+    <div class="contact-section scroll-reveal flex flex-wrap gap-5 text-sm border-t border-white/5 pt-6">
       <a href="https://github.com/dimas-renanda" target="_blank" class="social">
         <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
         GitHub
@@ -148,5 +280,31 @@
 
   </div>
 
+  <script>
+    // 5. Cursor glow effect - follows mouse
+    const cursorGlow = document.getElementById('cursorGlow');
+    document.addEventListener('mousemove', (e) => {
+      const x = e.clientX - 150; // Center the 300px div
+      const y = e.clientY - 150;
+      cursorGlow.style.left = x + 'px';
+      cursorGlow.style.top = y + 'px';
+    });
+
+    // 8. Scroll reveal - IntersectionObserver
+    const revealElements = document.querySelectorAll('.scroll-reveal');
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    });
+
+    revealElements.forEach(el => revealObserver.observe(el));
+  </script>
 </body>
 </html>
